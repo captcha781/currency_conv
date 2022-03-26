@@ -6,89 +6,101 @@ import Main from "../components/Main/Main";
 import Aux from "../hoc/Aux";
 import DataContext from "../context/dataContext";
 
-
 class Currency extends Component {
   constructor(props) {
     super(props);
-    
 
     // Custom Functions Binding
     this.fetchCurrencyList.bind(this);
-    this.fetchCurrencyRates.bind(this);
+    // this.fetchCurrencyRates.bind(this);
     this.handleCurrencyInput = this.handleCurrencyInput.bind(this);
     this.amountLeft = this.amountLeft.bind(this);
+    this.changedRight = this.changedRight.bind(this);
+    this.state = {
+      isLoading: true,
+      isRatesLoading: true,
+      currencyRates: {},
+      currencyList: {},
+      userVal: "USD",
+      amountLeft: 1,
+      currentCurrencyRight: "INR",
+      amountRight: 1,
+    };
   }
 
-  state = {
-    isLoading: true,
-    isRatesLoading: true,
-    currencyRates: {},
-    currencyList: {},
-    userVal: "USD",
-    amountLeft : 1
-  };
+  static contextType = DataContext;
 
-  static contextType = DataContext
-
-  componentDidMount() {
-    this.fetchCurrencyList();
-    this.fetchCurrencyRates();
-    
+  async componentDidMount() {
+    await this.fetchCurrencyList();
+    await this.fetchCurrencyRates();
   }
 
   async fetchCurrencyRates() {
-    let currencyrates = await axios.get(
-      "https://api.coinbase.com/v2/currencies"
-    );
+    let url = `https://api.coinbase.com/v2/exchange-rates?currency=${this.state.userVal}`;
 
-    
-    this.setState({
+    let currencyrates = await axios.get(url);
+
+    await this.setState({
       isRatesLoading: false,
       currencyRates: currencyrates,
     });
   }
+
   async fetchCurrencyList() {
     let currencylist = await axios.get(
       "https://openexchangerates.org/api/currencies.json"
     );
-    
+
     this.setState({
       currencyList: currencylist,
       isLoading: false,
     });
   }
 
-  handleCurrencyInput (e) {
+  async handleCurrencyInput(e) {
     let value = e.target.value;
-    this.setState({userVal : value});
+
+    if (value.length >= 3) {
+      await this.setState({ userVal: value });
+
+      await this.fetchCurrencyRates();
+    }
   }
 
-  amountLeft (e) {
+  async changedRight(e) {
     let value = e.target.value;
-    this.setState({amountLeft : value})
+    await this.setState({ currentCurrencyRight: value });
   }
 
-  
-
+  amountLeft(e) {
+    let value = e.target.value;
+    this.setState({ amountLeft: value });
+  }
 
   componentDidUpdate() {}
 
-  shouldComponentUpdate(nextProps, nextState) {
-    console.log( nextState.amountLeft);
+  async shouldComponentUpdate(nextProps, nextState) {
     return true;
   }
 
   render() {
-
-    
-
     if (this.state.isLoading || this.state.isRatesLoading) {
       return null;
     }
+
     return (
       <Aux>
         <Side />
-        <Main data={this.state.currencyList} changed = {this.handleCurrencyInput} currentCurrency = {this.state.userVal} amountleft = {this.amountLeft} />
+        <Main
+          data={this.state.currencyList}
+          changed={this.handleCurrencyInput}
+          currentCurrency={this.state.userVal}
+          amountleft={this.amountLeft}
+          currentCurrencyRight={this.state.currentCurrencyRight}
+          currentAmountRight={this.state.currencyRates}
+          changedRight={this.changedRight}
+          currentAmountLeft={this.state.amountLeft}
+        />
       </Aux>
     );
   }
