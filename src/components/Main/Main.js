@@ -1,5 +1,6 @@
 import React from "react";
 import Exchanger from "./exchanger/exchanger";
+import Grapher from "./Grapher/Grapher";
 
 const main = (props) => {
   return (
@@ -14,7 +15,7 @@ const main = (props) => {
         currentAmountLeft = {props.currentAmountLeft}
         currentAmountRight = {props.currentAmountRight}
       />
-      <div>Currency History Graph</div>
+      <Grapher currencyHistory = {props.currencyHistory} />
     </div>
   );
 };

@@ -19,6 +19,7 @@ class Currency extends Component {
     this.state = {
       isLoading: true,
       isRatesLoading: true,
+      isUrlLoading: true,
       currencyRates: {},
       currencyList: {},
       userVal: "USD",
@@ -33,6 +34,8 @@ class Currency extends Component {
   async componentDidMount() {
     await this.fetchCurrencyList();
     await this.fetchCurrencyRates();
+    // await this.fetchHistoryDataLeft();
+    await this.fetchHistoryDataRight();
   }
 
   async fetchCurrencyRates() {
@@ -57,6 +60,32 @@ class Currency extends Component {
     });
   }
 
+  // async fetchHistoryDataLeft() {
+  //   let url = `https://api.twelvedata.com/time_series?symbol=${this.state.userVal}&interval=1month&apikey=9aadae9496ec4b33809266ada2f82435`
+  //   let currencyHistory = await axios.get(
+  //     url
+  //   );
+  //   console.log(currencyHistory);
+  // }
+
+  async fetchHistoryDataRight() {
+    let url = "";
+    if (this.state.userVal == "USD") {
+      url = `https://api.twelvedata.com/time_series?symbol=USD/INR&interval=1month&apikey=9aadae9496ec4b33809266ada2f82435`;
+    } else {
+      url = `https://api.twelvedata.com/time_series?symbol=${this.state.userVal}/USD&interval=1month&apikey=9aadae9496ec4b33809266ada2f82435`;
+    }
+
+    // let url2 = `https://api.twelvedata.com/time_series?symbol=${this.state.currentCurrencyRight}&interval=1month&apikey=9aadae9496ec4b33809266ada2f82435`
+    let currencyHistory = await axios.get(url);
+    // let currencyHistoryRight = await axios.get(
+    //   url2
+    // );
+
+    // this.setState({currencyHistory : currencyHistory, currencyHistoryRight: currencyHistoryRight})
+    this.setState({ currencyHistory: currencyHistory, isUrlLoading: false });
+  }
+
   async handleCurrencyInput(e) {
     let value = e.target.value;
 
@@ -64,6 +93,7 @@ class Currency extends Component {
       await this.setState({ userVal: value });
 
       await this.fetchCurrencyRates();
+      await this.fetchHistoryDataRight();
     }
   }
 
@@ -84,7 +114,11 @@ class Currency extends Component {
   }
 
   render() {
-    if (this.state.isLoading || this.state.isRatesLoading) {
+    if (
+      this.state.isLoading ||
+      this.state.isRatesLoading ||
+      this.state.isUrlLoading
+    ) {
       return null;
     }
 
@@ -100,6 +134,7 @@ class Currency extends Component {
           currentAmountRight={this.state.currencyRates}
           changedRight={this.changedRight}
           currentAmountLeft={this.state.amountLeft}
+          currencyHistory={this.state.currencyHistory}
         />
       </Aux>
     );
