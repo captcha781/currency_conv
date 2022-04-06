@@ -60,17 +60,10 @@ class Currency extends Component {
     });
   }
 
-  // async fetchHistoryDataLeft() {
-  //   let url = `https://api.twelvedata.com/time_series?symbol=${this.state.userVal}&interval=1month&apikey=9aadae9496ec4b33809266ada2f82435`
-  //   let currencyHistory = await axios.get(
-  //     url
-  //   );
-  //   console.log(currencyHistory);
-  // }
 
   async fetchHistoryDataRight() {
     let url = "";
-    if (this.state.userVal == "USD") {
+    if (this.state.userVal === "USD") {
       url = `https://api.twelvedata.com/time_series?symbol=USD/INR&interval=1month&apikey=9aadae9496ec4b33809266ada2f82435`;
     } else {
       url = `https://api.twelvedata.com/time_series?symbol=${this.state.userVal}/USD&interval=1month&apikey=9aadae9496ec4b33809266ada2f82435`;

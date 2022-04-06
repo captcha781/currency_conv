@@ -44,8 +44,8 @@ function Side (props) {
               {" "}
               <a href="/" className="nav_link active">
                 {" "}
-                <i className="bx bx-grid-alt nav_icon"></i>{" "}
-                <span className="nav_name">Dashboard</span>{" "}
+                <i className="bx bx-github nav_icon"></i>{" "}
+                <span className="nav_name">Github</span>{" "}
               </a>{" "}
               <a href="/" className="nav_link">
                 {" "}

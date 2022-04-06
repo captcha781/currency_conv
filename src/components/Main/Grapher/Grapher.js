@@ -251,15 +251,7 @@ function Grapher(props) {
         borderWidth: 2,
         data: priceArr,
       },
-      {
-        label: "Currency History -2",
-        fill: false,
-        lineTension: 0.5,
-        backgroundColor: "rgba(75,100,212,1)",
-        borderColor: "rgba(55,194,200,1)",
-        borderWidth: 2,
-        data: [15.2, 40, 15, 30, 50, 67, 35, 83, 99, 67, 73, 85, 37, 74],
-      },
+      
     ],
   };
 
