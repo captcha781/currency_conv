@@ -35,50 +35,46 @@ function Side (props) {
         <nav className="nav">
           <div>
             {" "}
-            <a href="/" className="nav_logo">
+            <a href="/" className="nav_logo ">
               {" "}
               <i className="bx bx-dollar nav_logo-icon"></i>{" "}
               <span className="nav_logo-name">Currency Manager</span>{" "}
             </a>
             <div className="nav_list">
               {" "}
-              <a href="/" className="nav_link active">
+              <a href="https://github.com/captcha781" className="nav_link">
                 {" "}
-                <i className="bx bx-github nav_icon"></i>{" "}
+                <i className="fa-brands fa-github nav_icon"></i>{" "}
                 <span className="nav_name">Github</span>{" "}
               </a>{" "}
-              <a href="/" className="nav_link">
+              <a href="https://www.linkedin.com/in/bhuvaneshwaran-s-5930911a5" className="nav_link">
                 {" "}
-                <i className="bx bx-user nav_icon"></i>{" "}
-                <span className="nav_name">Users</span>{" "}
+                <i className="fa-brands fa-linkedin nav_icon"></i>{" "}
+                <span className="nav_name">LinkedIn</span>{" "}
               </a>{" "}
-              <a href="/" className="nav_link">
+              <a href="https://twitter.com/iamrealbhuvi" className="nav_link ">
                 {" "}
-                <i className="bx bx-message-square-detail nav_icon"></i>{" "}
-                <span className="nav_name">Messages</span>{" "}
+                <i className="fa-brands fa-twitter nav_icon"></i>{" "}
+                <span className="nav_name">Twitter</span>{" "}
               </a>{" "}
-              <a href="/" className="nav_link">
+              <a href="mailto:bhuvanesh19112001@gmail.com" className="nav_link ">
                 {" "}
-                <i className="bx bx-bookmark nav_icon"></i>{" "}
-                <span className="nav_name">Bookmark</span>{" "}
+                <i className="fa-solid fa-envelope nav_icon"></i>{" "}
+                <span className="nav_name">Mail Me</span>{" "}
               </a>{" "}
-              <a href="/" className="nav_link">
+              <a href="https://instagram.com/iamrealbhuvi" className="nav_link ">
                 {" "}
-                <i className="bx bx-folder nav_icon"></i>{" "}
-                <span className="nav_name">Files</span>{" "}
+                <i className="fa-brands fa-instagram nav_icon"></i>{" "}
+                <span className="nav_name">Instagram</span>{" "}
               </a>{" "}
-              <a href="/" className="nav_link">
-                {" "}
-                <i className="bx bx-bar-chart-alt-2 nav_icon"></i>{" "}
-                <span className="nav_name">Stats</span>{" "}
-              </a>{" "}
+              
             </div>
           </div>{" "}
-          <a href="/" className="nav_link">
+          {/* <a href="/" className="nav_link">
             {" "}
             <i className="bx bx-log-out nav_icon"></i>{" "}
             <span className="nav_name">SignOut</span>{" "}
-          </a>
+          </a> */}
         </nav>
       </div>
     </Aux>

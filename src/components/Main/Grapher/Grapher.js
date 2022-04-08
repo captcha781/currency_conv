@@ -256,13 +256,15 @@ function Grapher(props) {
   };
 
   return (
-    <div className="w-75 mt-4 mx-auto">
+    <div className="w-75 mt-4 mx-auto mb-5">
       <Line
         data={state}
         options={{
           scales: {
             xAxis: {
-              display: false,
+              grid: {
+                color: "rgba(0,0,0,0)"
+              }
             },
           },
           title: {
